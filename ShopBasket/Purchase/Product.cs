@@ -9,7 +9,7 @@ namespace ShopBasket.Purchase
 
         [Required]
         [MaxLength(50)]
-        public string? Name { get; set; }
+        public string Name { get; set; }
 
         public Supplier Supplier { get; set; }
 

@@ -1,30 +1,37 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ShopBasket.DTOs;
 using ShopBasket.Purchase;
 using ShopBasket.Services;
 
 namespace ShopBasket.Controllers
 {
-
     [Route("api/[controller]")]
     [ApiController]
     public class BasketController : ControllerBase
     {
-        BasketRepository _service;
+        private readonly BasketRepository _service;
 
         public BasketController(BasketRepository _service)
         {
             this._service = _service;
         }
 
-
-        [HttpGet("{id}")]
-        public ActionResult<Basket> GetById(int id)
+        [HttpPost]
+        public IActionResult Create(Basket newBasket)
         {
-            var basket = _service.GetById(id);
+            var basket = _service.Create(newBasket);
+            return CreatedAtAction(nameof(GetByIdDTO), new { id = basket!.Id }, basket);  
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            var basket = _service.GetByIdDTO(id);
 
             if (basket is not null)
             {
-                return basket;
+                _service.DeleteById(id);
+                return Ok();
             }
             else
             {
@@ -32,24 +39,14 @@ namespace ShopBasket.Controllers
             }
         }
 
-        [HttpPost]
-        public IActionResult Create(Basket newBasket)
+        [HttpGet]
+        public ActionResult<BasketDTO> GetByIdDTO(int id)
         {
-            var basket = _service.Create(newBasket);
-            return CreatedAtAction(nameof(GetById), new { id = basket!.Id }, basket);
-        }
-
-
-
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            var basket = _service.GetById(id);
+            var basket = _service.GetByIdDTO(id);
 
             if (basket is not null)
             {
-                _service.DeleteById(id);
-                return Ok();
+                return basket;
             }
             else
             {

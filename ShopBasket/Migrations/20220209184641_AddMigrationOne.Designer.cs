@@ -11,8 +11,8 @@ using ShopBasket.Context;
 namespace ShopBasket.Migrations
 {
     [DbContext(typeof(AppDbContex))]
-    [Migration("20220207212826_AddMigrationFirst")]
-    partial class AddMigrationFirst
+    [Migration("20220209184641_AddMigrationOne")]
+    partial class AddMigrationOne
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

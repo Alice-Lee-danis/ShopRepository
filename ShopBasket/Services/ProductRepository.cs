@@ -1,11 +1,11 @@
 ﻿using ShopBasket.Context;
+using ShopBasket.DTOs;
 using ShopBasket.Purchase;
 
 namespace ShopBasket.Services
 {
     public class ProductRepository
     {
-
         private readonly AppDbContex _context;
 
         public ProductRepository(AppDbContex _context)
@@ -13,11 +13,17 @@ namespace ShopBasket.Services
             this._context = _context;
         }
 
-        public IEnumerable<Product> GetAll(int from, int to)
+        public IEnumerable<ProductDTO> GetAllDTO(int from, int to)
         {
-            return _context.products!.Where(i => i.Id >= from && i.Id <= to);
+            var product = from b in _context.products
+                          select new ProductDTO()
+                          {
+                              Id = b.Id,
+                              Name = b.Name, SupplierName = b.Supplier.Name
+
+                          };
+
+            return product.Where(i => i.Id >= from && i.Id <= to);
         }
-
-
     }
 }

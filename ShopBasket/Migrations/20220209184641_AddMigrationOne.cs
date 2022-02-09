@@ -4,7 +4,7 @@
 
 namespace ShopBasket.Migrations
 {
-    public partial class AddMigrationFirst : Migration
+    public partial class AddMigrationOne : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
