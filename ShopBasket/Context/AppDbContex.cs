@@ -8,9 +8,9 @@ namespace ShopBasket.Context
         public AppDbContex(DbContextOptions<AppDbContex> options)
             : base(options)
         { }
-        public DbSet<Product> products { get; set; }
-        public DbSet<Supplier> suppliers { get; set; }
-        public DbSet<Basket> baskets { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<Basket> Baskets { get; set; }
 
     }
 }

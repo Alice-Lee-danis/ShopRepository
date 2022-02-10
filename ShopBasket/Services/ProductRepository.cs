@@ -15,7 +15,7 @@ namespace ShopBasket.Services
 
         public IEnumerable<ProductDTO> GetAllDTO(int from, int to)
         {
-            var product = from b in _context.products
+            var product = from b in _context.Products
                           select new ProductDTO()
                           {
                               Id = b.Id,
